@@ -1,27 +1,50 @@
-<div *ngIf="tasks?.length > 0;else noTasks">
-  <ul *ngFor="let task of tasks" class="container">
-    <li (dblclick)="deleteTask($event, task)">
-      <strong>{{ task.title }}</strong> : {{ task.description }} 
-      <a>
-        <input type="button" class="btn btn-danger" value="Eliminar" (click)="deleteTask($event, task)"/>
-        <input type="button" class="btn btn-info" value="Editar" (click)="editTask($event, task)" />
-      </a>
-      <div *ngIf="editState && taskToEdit.id === task.id">
-        <form (ngSubmit)="updateTask(task)">
-          <div class="row">
-            <div class="input-field col s6">
-              <input type="text" name="title" class="form-control" placeholder="Edit Title" [(ngModel)]="task.title">
+<div *ngIf="tasks?.length > 0 ;else noTasks">
+    <div class="row">
+     <div *ngFor="let task of tasks" class="col-sm-3" >
+        <div  class="card"  style="width: 20rem;">
+            <img class="card-img-top" src="http://lorempixel.com/318/180/" alt="Card image cap">
+            <div class="card-block">
+              <h4 class="card-title">{{ task.title }}</h4>
+              <p class="card-text">{{ task.description }}</p>
             </div>
-            <div class="input-field col s6">
-                <input  type="text" name="description" class="form-control" placeholder="Edit Description" [(ngModel)]="task.description">
-            </div>
-            <input type="submit" class="btn btn-primary" value="Update">
-            <button class="btn btn-danger" (click)="deleteTask($event, task)">Delete Task</button>
+            <a>
+              <input type="button" class="btn btn-danger" value="Eliminar" (click)="deleteTask($event, task)"/>
+              <input type="button" class="btn btn-info" value="Editar" (click)="editTask($event, task)" data-toggle="modal" data-target="#myModal" />
+            </a>
           </div>
-        </form>
-      </div>
-    </li>
-  </ul>
+          <div *ngIf="editState && taskToEdit.id === task.id">
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <form>
+                          <div class="row">
+                            <div class="input-field col s6">
+                              <input type="text" name="title" class="form-control" placeholder="Edit Title" [(ngModel)]="task.title">
+                            </div>
+                            <div class="input-field col s6">
+                                <input  type="text" name="description" class="form-control" placeholder="Edit Description" [(ngModel)]="task.description">
+                            </div>
+                           
+                          </div>
+                        </form>
+                  </div>
+                  <div class="modal-footer">
+                      <input type="submit" (click)="updateTask(task)" class="btn btn-primary" value="Update">
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+     </div>
+    </div>
+
 </div>
 
 <ng-template #noTasks>

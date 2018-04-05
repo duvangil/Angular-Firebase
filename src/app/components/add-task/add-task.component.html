@@ -1,15 +1,12 @@
     <h4 class="card-title">Add Task</h4>
     <form (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="">
-            <label>Title</label>
-          <input type="text" class="form-control"  [(ngModel)]="task.title" name="title">
-        
-        </div>
-        <div class="">
-            <label>Description</label>
-            <input type="text" class="form-control" [(ngModel)]="task.description" name="description">
-          </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput">Title</label>
+        <input type="text" class="form-control" name="title" [(ngModel)]="task.title" placeholder="Title">
+      </div>
+      <div class="form-group">
+        <label for="formGroupExampleInput2">Description</label>
+        <input type="text" class="form-control" name="description" [(ngModel)]="task.description" placeholder="Description">
       </div>
       <input type="submit" value="Guardar" class="btn btn-primary">
     </form>

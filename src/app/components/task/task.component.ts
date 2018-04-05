@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.services';
 import { Task } from './../../models/task.models';
+declare var $ :any;
+
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -15,7 +18,6 @@ export class TaskComponent implements OnInit {
 
   ngOnInit() {
     this.TaskService.getTasks().subscribe(tasks => {
-      console.log(tasks);
       this.tasks = tasks;
     });
   }
@@ -37,6 +39,7 @@ export class TaskComponent implements OnInit {
     this.TaskService.updateTask(task);
     this.taskToEdit = null;
     this.editState = false;
+    $('#myModal').modal('hide');
   }
 
 }
